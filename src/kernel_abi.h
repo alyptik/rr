@@ -1809,6 +1809,11 @@ struct X64Arch : public BaseArch<SupportedArch::x86_64, WordSize64Defs> {
     struct sigcontext uc_mcontext;
     sigset_t uc_sigmask;
     user_fpregs_struct uc_fpregs;
+    /*
+     * shadow stack pointer (added glibc 2.26 commit 25123a1) -jp
+     * upstream issue: <https://github.com/mozilla/rr/issues/2237>
+     */
+    __extension__ unsigned long long __ssp[4];
   };
   RR_VERIFY_TYPE_ARCH(SupportedArch::x86_64, ::ucontext_t, ucontext_t);
 
