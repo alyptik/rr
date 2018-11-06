@@ -15,7 +15,7 @@ LDFLAGS += -fPIC -Wl,-O3,-z,relro,-z,now,-z,noexecstack -L$(LIBS_PATH)
 LDLIBS += -lrt $(shell pkg-config libdw --cflags --libs --static)
 
 EXCLUDE_OBJS := trace-statfs64.o
-EXCLUDE_OBJS += strace.o strace-main.o
+EXCLUDE_OBJS += syscall.o strace-main.o
 EXCLUDE_OBJS += strace-ucopy.o strace-strace.o
 EXCLUDE_OBJS += strace-unwind-libdw.o strace-unwind.o
 EXCLUDE_OBJS += unwind.o unwind-libunwind.o
@@ -29,9 +29,9 @@ PATCH := 1
 THIS_MAKEFILE := Makefile.libstrace
 
 all:
-	$(MAKE) -f $(THIS_MAKEFILE) libstrace.so libstrace.a
+	$(MAKE) -f $(THIS_MAKEFILE) shared static
 
-.PHONY: all clean main print_vars shared static
+.PHONY: all clean main print_vars shared static bootstrap.d
 
 bootstrap.d:
 	@./bootstrap

@@ -52,11 +52,14 @@
 # endif /* HAVE_MX32_STRUCT_STAT64 */
 #endif /* MPERS_IS_m32 || MPERS_IS_mx32 */
 
-#ifndef HAVE_STRUCT_STAT64
+#if defined(__i386__)
+#define HAVE_STRUCT_STAT64
+#include <stat.h>
+typedef struct stat struct_stat64;
+#elif !defined(HAVE_STRUCT_STAT64)
 struct stat64 {};
+typedef struct stat struct_stat64;
 #endif
-
-typedef struct stat64 struct_stat64;
 
 #include MPERS_DEFS
 

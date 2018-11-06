@@ -22,7 +22,7 @@ for m in m32 mx32; do
 	     s/^MPERS_CC_FLAGS$s=.*/& @cc_flags_$m@/;
 	     s/^ARCH_MFLAGS$s=.*/& -DMPERS_IS_\$(MPERS_NAME) \$(MPERS_CC_FLAGS)/;
 	     " tests/Makefile.am > "$tests/Makefile.am"
-	find tests/ -maxdepth 1 -type f \! -name '*Makefile*' -exec ln -rsv -- {} "$tests/" \;
+	find tests/ -maxdepth 1 -type f \! -name '*Makefile*' -exec ln -rsfv -- {} "$tests/" \;
 done
 
 autoreconf -f -i .
